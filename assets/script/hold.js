@@ -41,10 +41,10 @@ cc.Class({
                 progressbar = 1
             }
 
-            if (progressbar = 1) {
-                let temp = (Number(this.clic.string) + 10)
-                this.clic.string = String(temp)
-            }
+            // if (progressbar = 1) {
+            //     let temp = (Number(this.clic.string) + 10)
+            //     this.clic.string = String(temp)
+            // }
 
             this.bar.getComponent(cc.ProgressBar).progress = progressbar;
 
