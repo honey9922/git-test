@@ -14,7 +14,9 @@ cc.Class({
 
     onLoad() {
 
+        var progressbar = this.bar.getComponent(cc.ProgressBar).progress;
         this.bar.active = false;
+       
 
         //獲取小車節點
         let { button } = this;
@@ -24,6 +26,8 @@ cc.Class({
         button.on(cc.Node.EventType.TOUCH_START, (event) => {
             mouseDown = true;
             this.bar.active = true;
+            progressbar = 0;
+            this.bar.getComponent(cc.ProgressBar).progress = progressbar;
         });
         //只有當使用者滑鼠按下才能拖拽
         button.on(cc.Node.EventType.TOUCH_MOVE, (event) => {
@@ -34,17 +38,14 @@ cc.Class({
             button.x = button.x + delta.x;
             button.y = button.y + delta.y;
 
-            var progressbar = this.bar.getComponent(cc.ProgressBar).progress;
+
             if (progressbar <= 1) {
                 progressbar += 0.005
             } else {
                 progressbar = 1
             }
 
-            // if (progressbar = 1) {
-            //     let temp = (Number(this.clic.string) + 10)
-            //     this.clic.string = String(temp)
-            // }
+            
 
             this.bar.getComponent(cc.ProgressBar).progress = progressbar;
 
@@ -53,6 +54,26 @@ cc.Class({
         //當滑鼠抬起的時候恢復狀態
         button.on(cc.Node.EventType.TOUCH_END, (event) => {
             mouseDown = false;
+
+            if (progressbar = 1) {
+                this.bar.active = true;
+
+            //     this.scheduleOnce(function() {
+                
+
+            //         let temp = (Number(this.clic.string) + 10)
+            //         this.clic.string = String(temp)
+                
+
+            // }, 1);
+
+            }
+            if (progressbar <= 1) {
+                this.bar.active = false;
+                progressbar = 0;
+            }
+
+            //this.bar.getComponent(cc.ProgressBar).progress = progressbar;
         })
         // button.on(cc.Node.EventType.TOUCH_CANCE, (event) => {
         //     mouseDown = false;
