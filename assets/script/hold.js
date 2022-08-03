@@ -8,7 +8,7 @@ cc.Class({
         bar: cc.Node,
 
         clic: cc.Label,
-        
+
 
 
     },
@@ -56,11 +56,9 @@ cc.Class({
                 this.node.color = cc.Color.RED;
                 mouseDown = false;
 
-                // this.scheduleOnce(function () {
-                    console.log("加10");
-                    let temp = (Number(this.clic.string) + 10)
-                    this.clic.string = String(temp)
-                // }, 1);
+                console.log("加10");
+                let temp = (Number(this.clic.string) + 10)
+                this.clic.string = String(temp)
 
                 this.scheduleOnce(function () {
                     this.node.color = cc.Color.WHITE;
@@ -68,9 +66,6 @@ cc.Class({
 
 
             }
-
-
-
             this.bar.getComponent(cc.ProgressBar).progress = progressbar;
 
 
@@ -80,42 +75,17 @@ cc.Class({
             mouseDown = false;
             this.node.color = cc.Color.WHITE;
 
-            // if (progressbar === 1) {
-            //     this.bar.active = true;
-            //     // this.barcolor.node.color = cc.color.RED;
-            //     console.log("加10");
-            //     let temp = (Number(this.clic.string) + 10)
-            //     this.clic.string = String(temp)
-
-            // }
             if (progressbar <= 1) {
                 this.bar.active = false;
                 progressbar = 0;
-                // let temp = (Number(this.clic.string) + 0)
-                //     this.clic.string = String(temp)
-            }
-
-            //this.bar.getComponent(cc.ProgressBar).progress = progressbar;
-        })
-        button.on(cc.Node.EventType.TOUCH_CANCE, (event) => {
-            mouseDown = false;
-            this.node.color = cc.Color.WHITE;
-            if (progressbar === 1) {
-                this.bar.active = true;
-
-                console.log("加10");
-                let temp = (Number(this.clic.string) + 10)
-                this.clic.string = String(temp)
-
-            }
-            if (progressbar <= 1) {
-                this.bar.active = false;
-                progressbar = 0;
-                // let temp = (Number(this.clic.string) + 0)
-                //     this.clic.string = String(temp)
             }
 
         })
+        // button.on(cc.Node.EventType.TOUCH_CANCE, (event) => {
+        //     mouseDown = false;
+        //     this.node.color = cc.Color.WHITE;
+
+        // })
 
     },
 
