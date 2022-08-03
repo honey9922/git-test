@@ -8,6 +8,9 @@ cc.Class({
         bar: cc.Node,
 
         clic: cc.Label,
+        
+
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -16,17 +19,19 @@ cc.Class({
 
         var progressbar = this.bar.getComponent(cc.ProgressBar).progress;
         this.bar.active = false;
-       
+
 
         //獲取小車節點
         let { button } = this;
         //新增變數判斷使用者當前滑鼠是不是處於按下狀態
         let mouseDown = false;
         //當使用者點選的時候記錄滑鼠點選狀態
+
         button.on(cc.Node.EventType.TOUCH_START, (event) => {
             mouseDown = true;
             this.bar.active = true;
             progressbar = 0;
+            this.node.color = cc.Color.WHITE;
             this.bar.getComponent(cc.ProgressBar).progress = progressbar;
         });
         //只有當使用者滑鼠按下才能拖拽
@@ -41,11 +46,30 @@ cc.Class({
 
             if (progressbar <= 1) {
                 progressbar += 0.005
+
             } else {
                 progressbar = 1
+
+            }
+            if (progressbar === 1) {
+                this.bar.active = false;
+                this.node.color = cc.Color.RED;
+                mouseDown = false;
+
+                // this.scheduleOnce(function () {
+                    console.log("加10");
+                    let temp = (Number(this.clic.string) + 10)
+                    this.clic.string = String(temp)
+                // }, 1);
+
+                this.scheduleOnce(function () {
+                    this.node.color = cc.Color.WHITE;
+                }, 1);
+
+
             }
 
-            
+
 
             this.bar.getComponent(cc.ProgressBar).progress = progressbar;
 
@@ -54,30 +78,44 @@ cc.Class({
         //當滑鼠抬起的時候恢復狀態
         button.on(cc.Node.EventType.TOUCH_END, (event) => {
             mouseDown = false;
+            this.node.color = cc.Color.WHITE;
 
-            if (progressbar = 1) {
+            // if (progressbar === 1) {
+            //     this.bar.active = true;
+            //     // this.barcolor.node.color = cc.color.RED;
+            //     console.log("加10");
+            //     let temp = (Number(this.clic.string) + 10)
+            //     this.clic.string = String(temp)
+
+            // }
+            if (progressbar <= 1) {
+                this.bar.active = false;
+                progressbar = 0;
+                // let temp = (Number(this.clic.string) + 0)
+                //     this.clic.string = String(temp)
+            }
+
+            //this.bar.getComponent(cc.ProgressBar).progress = progressbar;
+        })
+        button.on(cc.Node.EventType.TOUCH_CANCE, (event) => {
+            mouseDown = false;
+            this.node.color = cc.Color.WHITE;
+            if (progressbar === 1) {
                 this.bar.active = true;
 
-            //     this.scheduleOnce(function() {
-                
-
-            //         let temp = (Number(this.clic.string) + 10)
-            //         this.clic.string = String(temp)
-                
-
-            // }, 1);
+                console.log("加10");
+                let temp = (Number(this.clic.string) + 10)
+                this.clic.string = String(temp)
 
             }
             if (progressbar <= 1) {
                 this.bar.active = false;
                 progressbar = 0;
+                // let temp = (Number(this.clic.string) + 0)
+                //     this.clic.string = String(temp)
             }
 
-            //this.bar.getComponent(cc.ProgressBar).progress = progressbar;
         })
-        // button.on(cc.Node.EventType.TOUCH_CANCE, (event) => {
-        //     mouseDown = false;
-        // })
 
     },
 
